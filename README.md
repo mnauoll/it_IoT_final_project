@@ -10,10 +10,11 @@ This project is being developed as part of the IoT & Cloud Computing course and 
 
 - **IoT Device Simulator**: Simulates weather sensors collecting environmental data (temperature, humidity, rainfall, soil moisture, wind speed)
 - **Cloud Storage**: Azure Blob Storage for secure data storage
-- **Backend API**: REST API for data access and business logic
+- **Backend REST API**: RESTful API for data access and business logic
+- **CLI Interface**: Command-line interface for platform management and data access
 - **Architecture**: C4 model diagrams
 - **Cost Analysis**: Azure Pricing Calculator estimates
-- **API Testing**: Postman collection for testing endpoints
+- **Postman Collection**: Complete API testing collection with example requests
 
 ## Documentation
 
@@ -26,9 +27,11 @@ This project is being developed as part of the IoT & Cloud Computing course and 
 
 - **Cloud Platform**: Microsoft Azure
 - **Storage**: Azure Blob Storage
-- **Backend**: Python (planned)
+- **Backend**: Python Flask/FastAPI (planned)
 - **IoT Protocol**: MQTT (planned)
-- **API**: REST
+- **API**: RESTful API
+- **CLI**: Python-based command-line interface
+- **API Testing**: Postman
 
 ## Team
 
@@ -52,6 +55,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Planned
 - 📋 IoT device simulator implementation
-- 📋 Cloud infrastructure setup
-- 📋 Backend API development
+- 📋 Cloud infrastructure setup (Azure)
+- 📋 REST API development
+- 📋 CLI interface development
+- 📋 Postman collection creation
 - 📋 Testing and documentation

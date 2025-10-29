@@ -24,8 +24,10 @@ AgriWeather provides a cloud-connected IoT solution that:
 1. Deploys IoT weather sensors (or simulators) in agricultural fields
 2. Collects real-time environmental data (temperature, humidity, rainfall, soil moisture, wind speed, etc.)
 3. Stores data securely in cloud storage (Azure Blob Storage)
-4. Processes and analyzes data through a backend system
-5. Exposes data via REST API for integration with mobile apps, dashboards, and third-party systems
+4. Processes and analyzes data through a backend REST API
+5. Provides CLI (Command-Line Interface) for platform management and data access
+6. Exposes data via REST API for integration with mobile apps, dashboards, and third-party systems
+7. Includes comprehensive Postman collection for API testing and integration
 
 ## Target Users & Stakeholders
 
@@ -49,7 +51,7 @@ AgriWeather provides a cloud-connected IoT solution that:
 1. IoT device collects environmental data every 5-15 minutes
 2. Data is transmitted to cloud storage
 3. Backend processes and validates data
-4. User accesses current readings via API/dashboard
+4. User accesses current readings via CLI or REST API
 5. System displays temperature, humidity, rainfall, wind speed, soil moisture
 
 **Postconditions**: Current weather data is available and stored  
@@ -119,12 +121,27 @@ AgriWeather provides a cloud-connected IoT solution that:
 **Flow**:
 1. Backend tracks last transmission time for each device
 2. System validates data quality and sensor readings
-3. Admin queries device status via API
+3. Admin queries device status via CLI or API
 4. System reports device health metrics
 5. Admin identifies and addresses connectivity issues
 
 **Postconditions**: Device status report available  
 **Business Value**: Ensures data reliability and system uptime
+
+### UC-07: CLI-Based Data Query
+**Actor**: Farmer  
+**Description**: Quick access to weather data via command-line interface  
+**Preconditions**: CLI tool installed, device registered  
+**Flow**:
+1. User opens terminal/command prompt
+2. User executes CLI command with device ID or location
+3. CLI connects to REST API backend
+4. System retrieves latest weather data
+5. CLI displays formatted weather information (temperature, humidity, etc.)
+6. User can optionally export data to file
+
+**Postconditions**: Weather data displayed in terminal  
+**Business Value**: Fast, scriptable access to data without web browser
 
 ## User Stories
 
@@ -174,14 +191,22 @@ AgriWeather provides a cloud-connected IoT solution that:
 - GET endpoint returns latest readings for specified device
 - Response includes all sensor data types
 - API uses standard HTTP status codes
-- API documentation is available
+- Postman collection includes example requests
 
-**US-07**: As a dashboard developer, I want API endpoints to retrieve aggregated data so that I can display daily/weekly averages.  
+**US-07**: As a developer, I want API endpoints to retrieve aggregated data so that I can analyze daily/weekly averages.  
 **Acceptance Criteria**:
 - API supports aggregation by hour, day, week, month
 - Endpoints return min, max, and average values
 - Response time is under 3 seconds
 - API supports multiple device queries
+- All endpoints documented in Postman collection
+
+**US-07b**: As a farmer, I want to use a CLI tool to query my field's current weather so that I can quickly check conditions without complex tools.  
+**Acceptance Criteria**:
+- CLI command returns current weather in readable format
+- Supports filtering by device ID or location
+- Returns data in under 3 seconds
+- Displays all sensor readings (temperature, humidity, etc.)
 
 ### Epic 4: Alerts & Notifications
 
@@ -207,6 +232,7 @@ AgriWeather provides a cloud-connected IoT solution that:
 - API endpoint provides irrigation schedule recommendations
 - Recommendations consider crop type and growth stage
 - System calculates estimated water requirements
+- CLI command available for quick recommendations
 
 **US-11**: As a farm owner, I want to track water savings from data-driven irrigation so that I can measure ROI.  
 **Acceptance Criteria**:
@@ -214,6 +240,24 @@ AgriWeather provides a cloud-connected IoT solution that:
 - API provides water usage reports
 - Comparison with baseline/traditional irrigation methods
 - Reports show cost savings
+- Reports accessible via CLI and API
+
+### Epic 6: CLI & Developer Tools
+
+**US-12**: As a system administrator, I want a CLI tool to manage IoT devices so that I can register, configure, and monitor devices efficiently.  
+**Acceptance Criteria**:
+- CLI supports device registration and removal
+- Device configuration can be updated via CLI
+- Device status and health viewable in CLI
+- Commands follow standard CLI conventions
+
+**US-13**: As a developer, I want a Postman collection with all API endpoints so that I can quickly test and understand the API.  
+**Acceptance Criteria**:
+- Collection includes all REST API endpoints
+- Example requests and responses included
+- Environment variables configured for easy testing
+- Collection organized by functional area
+- Authentication examples included
 
 ## Value Proposition
 
@@ -255,14 +299,76 @@ AgriWeather provides a cloud-connected IoT solution that:
 - **Risk Mitigation**: 50% reduction in weather-related crop losses
 - **Decision Speed**: Reduce time from data collection to action by 80%
 
+## Technical Architecture
+
+### Platform Components
+
+1. **IoT Device Simulator**
+   - Simulates weather sensors (temperature, humidity, rainfall, soil moisture, wind speed)
+   - Sends data via MQTT protocol to cloud
+   - Configurable data generation intervals
+
+2. **Cloud Infrastructure (Azure)**
+   - Azure IoT Hub for device connectivity
+   - Azure Blob Storage for data persistence
+   - Azure Functions for data processing (optional)
+
+3. **REST API Backend**
+   - Python-based (Flask/FastAPI)
+   - Endpoints for data retrieval, device management, analytics
+   - JWT/API key authentication
+   - JSON response format
+
+4. **CLI Tool**
+   - Python-based command-line interface
+   - Commands for data query, device management, reports
+   - Cross-platform (Windows, Linux, macOS)
+   - Config file support for credentials
+
+5. **Postman Collection**
+   - Complete API endpoint coverage
+   - Example requests/responses
+   - Environment variables setup
+   - Testing scenarios
+
+### Example CLI Commands
+```
+# Get current weather for device
+agriweather get-current --device-id DEVICE001
+
+# Get historical data
+agriweather get-history --device-id DEVICE001 --from 2025-10-01 --to 2025-10-29
+
+# Register new device
+agriweather register-device --name "Field A Sensor" --location "40.7128,-74.0060"
+
+# Get irrigation recommendation
+agriweather recommend-irrigation --device-id DEVICE001 --crop-type wheat
+
+# List all devices
+agriweather list-devices
+```
+
+### Example API Endpoints
+```
+GET    /api/devices                    # List all devices
+GET    /api/devices/{id}/current       # Current readings
+GET    /api/devices/{id}/history       # Historical data
+POST   /api/devices                    # Register device
+GET    /api/analytics/irrigation       # Irrigation recommendations
+GET    /api/analytics/aggregated       # Aggregated data (daily/weekly/monthly)
+GET    /api/health                     # System health check
+```
+
 ## Future Enhancements
 
 1. **Machine Learning Integration**: Predictive analytics for weather forecasting and crop recommendations
 2. **Multi-Sensor Support**: Expand to include soil pH, nutrient levels, and pest detection
-3. **Mobile Applications**: Native iOS/Android apps for farmers
-4. **Integration Capabilities**: Connect with existing farm management systems
-5. **Automated Actions**: Trigger irrigation systems automatically based on sensor data
-6. **Community Features**: Share weather data and insights with neighboring farms
+3. **Web Dashboard**: Optional web interface for visualization
+4. **Mobile Applications**: Native iOS/Android apps for farmers
+5. **Integration Capabilities**: Connect with existing farm management systems
+6. **Automated Actions**: Trigger irrigation systems automatically based on sensor data
+7. **Community Features**: Share weather data and insights with neighboring farms
 
 ---
 
