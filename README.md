@@ -16,10 +16,29 @@ This project is being developed as part of the IoT & Cloud Computing course and 
 - **Cost Analysis**: Azure Pricing Calculator estimates
 - **Postman Collection**: Complete API testing collection with example requests
 
+## Architecture
+
+### C4 Model Diagrams
+
+#### System Context Diagram
+![System Context Diagram](source/images/system-context-diagram.png)
+
+The System Context diagram shows the high-level interaction between users (Farmers), the AgriWeather system, external weather APIs, and IoT device simulators.
+
+#### Container Diagram
+![Container Diagram](source/images/conteiner-diagram.png)
+
+The Container diagram details the internal architecture including:
+- IoT Device Simulator: Simulates weather sensor data
+- MQTT Broker: Handles real-time data ingestion
+- REST API Backend: Central service with business logic and analytics (FastAPI/Flask, Azure Functions)
+- Database: Azure Blob Storage for persistence
+- Cloud Weather API: External forecast data provider
+- Data Analytics Module: Optional container for advanced analytics (Python, Azure Functions)
+
 ## Documentation
 
 - [Business Context & User Stories](BUSINESS_CONTEXT.md) - Detailed use cases, user stories, and business requirements
-- Architecture Diagram - Coming soon
 - Installation Guide - Coming soon
 - API Documentation - Coming soon
 
