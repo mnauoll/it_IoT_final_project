@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriWeather - System Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🌾 AgriWeather IoT Platform</h1>
+                <p class="subtitle">System Dashboard - Real-time Monitoring</p>
+            </div>
+            <nav>
+                <a href="/" class="nav-link">Farmer View</a>
+                <a href="/dashboard" class="nav-link active">Dashboard</a>
+            </nav>
+        </header>
+
+        <div id="alert-banner" class="alert-banner"></div>
+        <div id="error-message" style="display: none;" class="error"></div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Devices</h3>
+                <div class="stat-value" id="total-devices">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Online Devices</h3>
+                <div class="stat-value" id="online-devices">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Alerts</h3>
+                <div class="stat-value" id="active-alerts">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Polling Status</h3>
+                <div class="stat-value" id="polling-status">Active</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="panel">
+                <h2>📡 All Devices</h2>
+                <div id="devices-list" class="loading">Loading devices...</div>
+            </div>
+
+            <div class="panel">
+                <h2>⚠️ Recent Alerts</h2>
+                <div id="recent-alerts" class="loading">Loading alerts...</div>
+            </div>
+        </div>
+
+        <div class="panel full-width">
+            <h2>📊 Device Status Overview</h2>
+            <div id="device-status-table" class="loading">Loading...</div>
+        </div>
+
+        <div class="polling-info">
+            <p>Server polling sensor data every <span id="polling-interval">30</span> seconds</p>
+            <p>Last update: <span id="last-update">-</span></p>
+        </div>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>
+

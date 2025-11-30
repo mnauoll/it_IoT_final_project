@@ -1,0 +1,19 @@
+# AgriWeather IoT Platform - Python Dependencies
+
+# Azure IoT SDK
+azure-iot-device>=2.14.0
+azure-iot-hub>=2.4.0
+
+# Azure Storage
+azure-storage-blob>=12.19.0
+
+# Web Framework
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# HTTP Client (for CLI)
+requests>=2.31.0
+
+# Configuration
+configparser>=6.0.0
+

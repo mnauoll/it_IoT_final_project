@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriWeather - IoT Weather Monitoring</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌾 AgriWeather IoT Platform</h1>
+            <p class="subtitle">Weather monitoring for agriculture</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="devices">Devices</button>
+            <button class="tab-btn" data-tab="current">Current Data</button>
+            <button class="tab-btn" data-tab="history">History</button>
+            <button class="tab-btn" data-tab="analytics">Analytics</button>
+            <button class="tab-btn" data-tab="irrigation">Irrigation</button>
+        </nav>
+
+        <div id="devices" class="tab-content active">
+            <h2>Registered Devices</h2>
+            <button class="btn-primary" onclick="loadDevices()">Refresh List</button>
+            <div id="devices-list" class="devices-grid"></div>
+        </div>
+
+        <div id="current" class="tab-content">
+            <h2>Current Readings</h2>
+            <div class="form-group">
+                <label for="current-device">Select device:</label>
+                <select id="current-device" class="select-input"></select>
+                <button class="btn-primary" onclick="loadCurrentData()">Load Data</button>
+            </div>
+            <div id="current-data" class="sensor-readings"></div>
+        </div>
+
+        <div id="history" class="tab-content">
+            <h2>Historical Data</h2>
+            <div class="form-group">
+                <label for="history-device">Select device:</label>
+                <select id="history-device" class="select-input"></select>
+                <label for="history-limit">Number of records:</label>
+                <input type="number" id="history-limit" value="20" min="1" max="100" class="number-input">
+                <button class="btn-primary" onclick="loadHistory()">Load History</button>
+            </div>
+            <div id="history-chart-container">
+                <canvas id="history-chart"></canvas>
+            </div>
+        </div>
+
+        <div id="analytics" class="tab-content">
+            <h2>Analytics and Statistics</h2>
+            <div class="form-group">
+                <label for="analytics-device">Select device:</label>
+                <select id="analytics-device" class="select-input"></select>
+                <label for="analytics-period">Period:</label>
+                <select id="analytics-period" class="select-input">
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                </select>
+                <button class="btn-primary" onclick="loadAnalytics()">Load Analytics</button>
+            </div>
+            <div id="analytics-data" class="analytics-grid"></div>
+        </div>
+
+        <div id="irrigation" class="tab-content">
+            <h2>Irrigation Recommendations</h2>
+            <div class="form-group">
+                <label for="irrigation-device">Select device:</label>
+                <select id="irrigation-device" class="select-input"></select>
+                <label for="irrigation-crop">Crop type:</label>
+                <input type="text" id="irrigation-crop" value="general" class="text-input" placeholder="general, wheat, corn, etc.">
+                <button class="btn-primary" onclick="loadIrrigation()">Get Recommendation</button>
+            </div>
+            <div id="irrigation-data" class="irrigation-card"></div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

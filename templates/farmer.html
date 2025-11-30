@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriWeather - Farmer View</title>
+    <link rel="stylesheet" href="/static/farmer.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🌾 AgriWeather IoT Platform</h1>
+                <p class="subtitle">Farmer View - Field Monitoring</p>
+            </div>
+            <nav>
+                <a href="/" class="nav-link active">Farmer View</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+            </nav>
+            <button class="btn refresh-btn" onclick="loadData()">🔄 Refresh</button>
+        </header>
+
+        <div id="alert-banner" class="alert-banner"></div>
+        <div id="error-message" style="display: none;" class="error"></div>
+
+        <div class="device-list">
+            <h2>📡 My Fields</h2>
+            <div id="devices-container" class="loading">Loading devices...</div>
+        </div>
+
+        <div id="device-details" style="display: none;">
+            <div class="alerts-container">
+                <h2>⚠️ Field Alerts & Warnings</h2>
+                <div id="alerts-list" class="loading">Loading alerts...</div>
+            </div>
+
+            <div class="dashboard">
+                <div class="card">
+                    <h2>🌡️ Current Weather</h2>
+                    <div id="current-weather" class="loading">Loading...</div>
+                </div>
+
+                <div class="card">
+                    <h2>💧 Soil & Water</h2>
+                    <div id="soil-water" class="loading">Loading...</div>
+                </div>
+
+                <div class="card">
+                    <h2>🌬️ Wind Conditions</h2>
+                    <div id="wind-info" class="loading">Loading...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💡 Irrigation Recommendation</h2>
+                <div id="irrigation-recommendation" class="loading">Loading...</div>
+            </div>
+
+            <div class="chart-container">
+                <h2>📊 Recent Readings (Last 10)</h2>
+                <div id="history-chart" class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/farmer.js"></script>
+</body>
+</html>
+

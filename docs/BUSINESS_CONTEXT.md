@@ -1,5 +1,15 @@
 # Business Context - AgriWeather IoT Platform
 
+## Architecture Diagrams
+
+The AgriWeather platform architecture is documented using C4 model diagrams:
+
+### System Context Diagram
+![System Context Diagram](../source/images/system-context-diagram.png)
+
+### Container Diagram
+![Container Diagram](../source/images/conteiner-diagram.png)
+
 ## Executive Summary
 
 AgriWeather is an innovative IoT-based weather monitoring platform designed specifically for agricultural applications. The platform provides real-time weather data collection, storage, and analysis to help farmers and agricultural professionals make informed decisions about crop planning, irrigation scheduling, and overall farm management.

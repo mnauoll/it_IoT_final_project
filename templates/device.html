@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriWeather - Device Details</title>
+    <link rel="stylesheet" href="/static/device.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>🌾 AgriWeather IoT Platform</h1>
+                <p class="subtitle">Device Details</p>
+            </div>
+            <nav>
+                <a href="/" class="nav-link">Farmer View</a>
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+            </nav>
+            <button class="btn refresh-btn" onclick="loadAllData()">🔄 Refresh</button>
+        </header>
+
+        <div id="error-message" style="display: none;" class="error"></div>
+
+        <div id="device-info" class="device-info-card">
+            <h2 id="device-name">Loading...</h2>
+            <div class="device-meta">
+                <span id="device-id"></span>
+                <span id="device-status" class="status-badge"></span>
+            </div>
+            <div class="device-location" id="device-location"></div>
+        </div>
+
+        <div id="alert-banner" class="alert-banner"></div>
+
+        <div class="alerts-container">
+            <h2>⚠️ Alerts & Warnings</h2>
+            <div id="alerts-list" class="loading">Loading alerts...</div>
+        </div>
+
+        <div class="sensors-grid">
+            <div class="sensor-card">
+                <h3>🌡️ Temperature</h3>
+                <div class="sensor-value" id="sensor-temperature">-</div>
+                <div class="sensor-unit">°C</div>
+            </div>
+            <div class="sensor-card">
+                <h3>💧 Humidity</h3>
+                <div class="sensor-value" id="sensor-humidity">-</div>
+                <div class="sensor-unit">%</div>
+            </div>
+            <div class="sensor-card">
+                <h3>🌧️ Rainfall</h3>
+                <div class="sensor-value" id="sensor-rainfall">-</div>
+                <div class="sensor-unit">mm/h</div>
+            </div>
+            <div class="sensor-card">
+                <h3>🌱 Soil Moisture</h3>
+                <div class="sensor-value" id="sensor-soil">-</div>
+                <div class="sensor-unit">%</div>
+            </div>
+            <div class="sensor-card">
+                <h3>💨 Wind Speed</h3>
+                <div class="sensor-value" id="sensor-wind">-</div>
+                <div class="sensor-unit">km/h</div>
+            </div>
+            <div class="sensor-card">
+                <h3>🕐 Last Update</h3>
+                <div class="sensor-value" id="sensor-timestamp" style="font-size: 0.9em;">-</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💡 Irrigation Recommendation</h2>
+            <div id="irrigation-recommendation" class="loading">Loading...</div>
+        </div>
+
+        <div class="card">
+            <h2>📊 Historical Data</h2>
+            <div class="chart-controls">
+                <label>
+                    Number of readings:
+                    <select id="history-limit" onchange="loadHistory()">
+                        <option value="10">Last 10</option>
+                        <option value="20">Last 20</option>
+                        <option value="50">Last 50</option>
+                        <option value="100">Last 100</option>
+                    </select>
+                </label>
+            </div>
+            <canvas id="history-chart"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>📋 Recent Readings Table</h2>
+            <div id="readings-table" class="loading">Loading...</div>
+        </div>
+    </div>
+
+    <script src="/static/device.js"></script>
+</body>
+</html>
+
