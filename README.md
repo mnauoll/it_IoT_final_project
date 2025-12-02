@@ -297,6 +297,7 @@ Additional documentation is available in the `docs/` directory:
 - `README_SETUP.md` - Detailed setup instructions
 - `QUICK_START.md` - Quick start guide
 - `UI_README.md` - Web interface documentation
+- `AgriWeather_Cloud_Cost_Estimation.xlsx` - Cost calculation
 
 ## Technology Stack
 
